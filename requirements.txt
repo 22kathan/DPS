@@ -1,0 +1,16 @@
+# Core ML
+numpy
+pandas
+scikit-learn
+imbalanced-learn
+
+
+
+# Web App
+fastapi
+uvicorn
+jinja2
+python-multipart
+
+# Utilities
+joblib

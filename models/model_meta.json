@@ -1,0 +1,51 @@
+{
+  "best_model": "Random Forest",
+  "feature_names": [
+    "Pregnancies",
+    "Glucose",
+    "BloodPressure",
+    "SkinThickness",
+    "Insulin",
+    "BMI",
+    "DiabetesPedigreeFunction",
+    "Age"
+  ],
+  "metrics": [
+    {
+      "Model": "KNN",
+      "Accuracy": 68.18,
+      "Precision": 53.42,
+      "Recall": 72.22,
+      "F1-Score": 61.42,
+      "ROC-AUC": 77.44,
+      "Time (s)": 0.001
+    },
+    {
+      "Model": "Random Forest",
+      "Accuracy": 74.03,
+      "Precision": 60.61,
+      "Recall": 74.07,
+      "F1-Score": 66.67,
+      "ROC-AUC": 81.67,
+      "Time (s)": 0.101
+    },
+    {
+      "Model": "SVM",
+      "Accuracy": 70.78,
+      "Precision": 57.38,
+      "Recall": 64.81,
+      "F1-Score": 60.87,
+      "ROC-AUC": 79.93,
+      "Time (s)": 0.056
+    },
+    {
+      "Model": "Naive Bayes",
+      "Accuracy": 69.48,
+      "Precision": 55.38,
+      "Recall": 66.67,
+      "F1-Score": 60.5,
+      "ROC-AUC": 77.41,
+      "Time (s)": 0.0
+    }
+  ]
+}
