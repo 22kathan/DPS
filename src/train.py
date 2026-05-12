@@ -53,8 +53,12 @@ def get_models():
 
 # ────────────────────── Evaluation ──────────────────────
 
-def evaluate_model(name, model, X_test, y_test):
+def evaluate_model(name, model, X_train, y_train, X_test, y_test):
     """Evaluate a trained model and return a metrics dictionary."""
+    # Train Accuracy
+    y_train_pred = (model.predict_proba(X_train)[:, 1] >= 0.5).astype(int) if hasattr(model, "predict_proba") else model.predict(X_train)
+    train_acc = accuracy_score(y_train, y_train_pred)
+
     if hasattr(model, "predict_proba"):
         y_proba = model.predict_proba(X_test)[:, 1]
     elif hasattr(model, "predict"):
@@ -66,6 +70,7 @@ def evaluate_model(name, model, X_test, y_test):
 
     metrics = {
         "Model": name,
+        "Train Accuracy": round(train_acc * 100, 2),
         "Accuracy": round(accuracy_score(y_test, y_pred) * 100, 2),
         "Precision": round(precision_score(y_test, y_pred, zero_division=0) * 100, 2),
         "Recall": round(recall_score(y_test, y_pred, zero_division=0) * 100, 2),
@@ -77,17 +82,17 @@ def evaluate_model(name, model, X_test, y_test):
 
 def print_results_table(all_metrics):
     """Pretty-print a comparison table of all models."""
-    print("\n" + "=" * 80)
+    print("\n" + "=" * 90)
     print("  MODEL PERFORMANCE COMPARISON")
-    print("=" * 80)
-    header = f"{'Model':<18} {'Accuracy':>10} {'Precision':>10} {'Recall':>10} {'F1-Score':>10} {'ROC-AUC':>10}"
+    print("=" * 90)
+    header = f"{'Model':<18} {'Train Acc':>10} {'Test Acc':>10} {'Precision':>10} {'Recall':>10} {'F1-Score':>10} {'ROC-AUC':>10}"
     print(header)
-    print("-" * 80)
+    print("-" * 90)
     for m in sorted(all_metrics, key=lambda x: x["Accuracy"], reverse=True):
         auc_str = f"{m['ROC-AUC']:>9.2f}%" if m["ROC-AUC"] else "     N/A"
-        print(f"{m['Model']:<18} {m['Accuracy']:>9.2f}% {m['Precision']:>9.2f}% "
+        print(f"{m['Model']:<18} {m['Train Accuracy']:>9.2f}% {m['Accuracy']:>9.2f}% {m['Precision']:>9.2f}% "
               f"{m['Recall']:>9.2f}% {m['F1-Score']:>9.2f}% {auc_str}")
-    print("=" * 80)
+    print("=" * 90)
 
 
 # ────────────────────── Main Training Pipeline ──────────────────────
@@ -116,7 +121,7 @@ def train_all(csv_path: str, models_dir: str):
         start = time.time()
         model.fit(X_train, y_train)
         elapsed = time.time() - start
-        metrics, _ = evaluate_model(name, model, X_test, y_test)
+        metrics, _ = evaluate_model(name, model, X_train, y_train, X_test, y_test)
         metrics["Time (s)"] = round(elapsed, 3)
         all_metrics.append(metrics)
         trained_models[name] = model

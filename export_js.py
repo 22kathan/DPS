@@ -17,11 +17,17 @@ code = m2c.export_to_javascript(model)
 mean_vals = list(scaler.mean_)
 scale_vals = list(scaler.scale_)
 
+with open(os.path.join(models_dir, "model_meta.json"), "r") as f:
+    model_meta = json.load(f)
+
 js_content = f"""
 // Auto-generated Machine Learning Model (m2cgen)
 // Scaler Info
 const scalerMean = {json.dumps(mean_vals)};
 const scalerScale = {json.dumps(scale_vals)};
+
+// Model Metrics for Insights
+const modelMetrics = {json.dumps(model_meta.get("metrics", []), indent=4)};
 
 function scaleFeatures(features) {{
     let scaled = [];

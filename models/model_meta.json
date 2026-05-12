@@ -13,6 +13,7 @@
   "metrics": [
     {
       "Model": "KNN",
+      "Train Accuracy": 100.0,
       "Accuracy": 68.18,
       "Precision": 53.42,
       "Recall": 72.22,
@@ -22,24 +23,27 @@
     },
     {
       "Model": "Random Forest",
+      "Train Accuracy": 95.62,
       "Accuracy": 74.03,
       "Precision": 60.61,
       "Recall": 74.07,
       "F1-Score": 66.67,
       "ROC-AUC": 81.67,
-      "Time (s)": 0.102
+      "Time (s)": 0.097
     },
     {
       "Model": "SVM",
+      "Train Accuracy": 90.25,
       "Accuracy": 70.78,
       "Precision": 57.38,
       "Recall": 64.81,
       "F1-Score": 60.87,
       "ROC-AUC": 79.93,
-      "Time (s)": 0.047
+      "Time (s)": 0.05
     },
     {
       "Model": "Naive Bayes",
+      "Train Accuracy": 73.12,
       "Accuracy": 69.48,
       "Precision": 55.38,
       "Recall": 66.67,
