@@ -27,7 +27,7 @@
       "Recall": 74.07,
       "F1-Score": 66.67,
       "ROC-AUC": 81.67,
-      "Time (s)": 0.101
+      "Time (s)": 0.102
     },
     {
       "Model": "SVM",
@@ -36,7 +36,7 @@
       "Recall": 64.81,
       "F1-Score": 60.87,
       "ROC-AUC": 79.93,
-      "Time (s)": 0.056
+      "Time (s)": 0.047
     },
     {
       "Model": "Naive Bayes",
@@ -45,7 +45,7 @@
       "Recall": 66.67,
       "F1-Score": 60.5,
       "ROC-AUC": 77.41,
-      "Time (s)": 0.0
+      "Time (s)": 0.001
     }
   ]
 }
