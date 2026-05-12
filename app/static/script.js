@@ -40,18 +40,12 @@ form.addEventListener("submit", async (e) => {
     });
 
     try {
-        const response = await fetch("/predict", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(payload),
-        });
-
-        if (!response.ok) {
-            const err = await response.json();
-            throw new Error(err.error || "Prediction failed");
-        }
-
-        const result = await response.json();
+        // Collect feature values in an array matching FEATURES order
+        const feature_values = FEATURES.map(f => payload[f]);
+        
+        // Use local JS model inference (from model_inference.js)
+        const result = predict_single(feature_values, FEATURES);
+        
         showResult(result);
     } catch (error) {
         alert("⚠ Error: " + error.message);
